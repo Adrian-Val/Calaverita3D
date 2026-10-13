@@ -3,81 +3,71 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>La Catrina de Informática · Calaverita 3D IFREM</title>
+<title>La Hechicera de Informática · Calaverita de Halloween IFREM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Rozha+One&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg1:#fff1da; --bg2:#ffc78a; --ink:#2a0f3d; --muted:#6a4a7e;
-  --accent:#b4174f; --panel:rgba(255,248,235,.9); --line:rgba(42,15,61,.2);
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg1:#3a1260; --bg2:#12061f; --ink:#fbeed6; --muted:#cdb7e0;
-    --accent:#ff9f1c; --panel:rgba(30,12,48,.88); --line:rgba(251,238,214,.22);
-  }
-}
-:root[data-theme="dark"]{
-  --bg1:#3a1260; --bg2:#12061f; --ink:#fbeed6; --muted:#cdb7e0;
-  --accent:#ff9f1c; --panel:rgba(30,12,48,.88); --line:rgba(251,238,214,.22);
-}
+:root{--bg1:#1a0630;--bg2:#050208;--ink:#f6e9d2;--muted:#b9a6d3;--accent:#ff3d2e;--glow:#7cff4f;--panel:rgba(16,7,28,.84);--line:rgba(255,61,46,.4);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{height:100%;margin:0}
-body{
-  background:radial-gradient(ellipse at 50% 38%, var(--bg1) 0%, var(--bg2) 78%) var(--bg2);
-  color:var(--ink);
-  font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
-  overflow:hidden;
-}
+body{background:radial-gradient(ellipse at 50% 30%,var(--bg1) 0%,var(--bg2) 72%) var(--bg2);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;overflow:hidden}
 #stage{position:fixed;inset:0;touch-action:none}
 #stage canvas{display:block;width:100%;height:100%;cursor:grab;outline:none}
 #stage canvas:active{cursor:grabbing}
 #stage canvas:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
 .fail{position:absolute;inset:0;display:grid;place-items:center;margin:0;padding:24px;text-align:center}
-
+#mist{position:fixed;left:-20%;right:-20%;bottom:0;height:42%;pointer-events:none;background:radial-gradient(ellipse at 30% 100%,rgba(124,255,79,.16),transparent 60%),radial-gradient(ellipse at 75% 100%,rgba(160,90,255,.2),transparent 60%);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translateX(8%)}}
+@media (prefers-reduced-motion:reduce){#mist{animation:none}}
+#vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 32%,rgba(0,0,0,.93) 100%)}
 .top{position:fixed;left:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 16px) 20px 0;pointer-events:none;max-width:70%}
-.top h1{font-family:'Rozha One',Georgia,serif;font-weight:400;font-size:clamp(22px,4.6vw,38px);line-height:1.05;margin:0;color:var(--ink)}
-.top p{margin:6px 0 0;color:var(--muted);font-size:14px}
-
+.top h1{font-family:'Cinzel Decorative','Rozha One',Georgia,serif;font-weight:700;font-size:clamp(20px,4.4vw,36px);line-height:1.08;margin:0;color:var(--accent);text-shadow:0 0 24px rgba(255,30,20,.7),0 2px 0 #000;animation:fl 6s infinite}
+.top p{margin:8px 0 0;color:var(--glow);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-shadow:0 0 12px rgba(124,255,79,.5)}
 .legend{position:fixed;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 0;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(340px,86vw)}
-.legend button{
-  font:600 14px 'Figtree',system-ui,sans-serif;color:var(--ink);background:var(--panel);
-  border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;
-}
+.legend button{font:600 14px 'Figtree',system-ui,sans-serif;color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 0 18px rgba(255,120,0,.18)}
+.legend button:hover{border-color:var(--accent)}
 .legend button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.legend ul{list-style:none;margin:0;padding:12px 14px;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;display:grid;gap:10px;max-height:62vh;overflow:auto}
-.legend ul[hidden]{display:none}
+.legend ul,.verse{margin:0;padding:12px 14px;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;max-height:56vh;overflow:auto;backdrop-filter:blur(8px)}
+.legend ul{list-style:none;display:grid;gap:10px}
+.legend ul[hidden],.verse[hidden]{display:none}
 .legend li{display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:start;font-size:14px;line-height:1.35}
 .legend i{width:14px;height:14px;border-radius:50%;margin-top:3px;border:1.5px solid var(--line)}
 .legend b{font-weight:600}
 .legend span{color:var(--muted)}
-
-.hint{position:fixed;left:0;right:0;bottom:0;margin:0;text-align:center;padding:0 20px calc(env(safe-area-inset-bottom,0px) + 16px);color:var(--muted);font-size:14px;pointer-events:none}
+.verse{font:italic 15px/1.55 Georgia,serif;color:var(--ink);text-align:center}
+.verse p{margin:0 0 12px}.verse p:last-child{margin:0}
+.hint{position:fixed;left:0;right:0;bottom:0;margin:0;text-align:center;padding:0 20px calc(env(safe-area-inset-bottom,0px) + 16px);color:var(--muted);font-size:14px;pointer-events:none;text-shadow:0 1px 6px #000}
+#grain{position:fixed;inset:-50%;pointer-events:none;opacity:.16;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");animation:gr .8s steps(4) infinite}
+@keyframes gr{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}}
+#flash{position:fixed;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 60% 15%,rgba(210,220,255,.6),rgba(110,90,200,.18) 60%,transparent)}
+@keyframes fl{0%,91%,100%{opacity:1}92%{opacity:.5}94%{opacity:1}96%{opacity:.65}}
+.verse{border-color:rgba(255,61,46,.55);box-shadow:0 0 30px rgba(255,30,30,.25),inset 0 0 30px rgba(0,0,0,.6)}
+.verse:not([hidden]) p{animation:rise 1.4s both}
+.verse p:nth-child(2){animation-delay:.8s!important}.verse p:nth-child(3){animation-delay:1.6s!important}.verse p:nth-child(4){animation-delay:2.4s!important}.verse p:nth-child(5){animation-delay:3.2s!important}
+@keyframes rise{from{opacity:0;transform:translateY(8px);filter:blur(4px)}}
+.verse .sig{font:700 11px 'Cinzel Decorative',Georgia,serif;font-style:normal;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){#grain,.top h1,.verse p{animation:none!important}}
 </style>
 </head>
 <body>
-<div id="stage"></div>
+<div id="stage"></div><div id="mist"></div><div id="vig"></div><div id="grain"></div><div id="flash"></div>
 
 <header class="top">
-  <h1>La Catrina de Informática</h1>
-  <p>Calaverita 3D · IFREM</p>
+  <h1>La Hechicera de Informática</h1>
+  <p>Calaverita de Halloween · IFREM</p>
 </header>
 
 <aside class="legend">
   <button id="lg" type="button" aria-expanded="false" aria-controls="lgList">¿Qué lleva?</button>
-  <ul id="lgList" hidden>
-    <li><i style="background:#ffb62e"></i><div><b>Sombrero con circuitos y cempasúchil</b><br><span>Tecnología y tradición en una sola pieza.</span></div></li>
-    <li><i style="background:#d6336c"></i><div><b>Diadema con micrófono</b><br><span>Desarrollo: orientación por teléfono sobre trámites y pagos.</span></div></li>
-    <li><i style="background:#c0c6d0"></i><div><b>Destornillador</b><br><span>Soporte Técnico: mantenimiento en oficinas registrales.</span></div></li>
-    <li><i style="background:#9fd4ff"></i><div><b>Lupa</b><br><span>Simboliza la transparencia.</span></div></li>
-    <li><i style="background:#2a7fff"></i><div><b>Collar de cables con conectores RJ45</b><br><span>La red que conecta a todo el Instituto.</span></div></li>
-    <li><i style="background:#ff8a00"></i><div><b>Listón IFREM</b><br><span>En la cintura del vestido.</span></div></li>
-    <li><i style="background:#3b1260"></i><div><b>Laptop</b><br><span>Muestra el mensaje: Transparencia = Integridad.</span></div></li>
-  </ul>
+  <ul id="lgList" hidden><li><i style="background:#ff7a00"></i><div><b>Sombrero de bruja con circuitos y calabazas</b><br><span>Magia y tecnología en una sola pieza.</span></div></li><li><i style="background:#d6336c"></i><div><b>Diadema con micrófono</b><br><span>Desarrollo: orientación por teléfono sobre trámites y pagos.</span></div></li><li><i style="background:#c0c6d0"></i><div><b>Destornillador</b><br><span>Soporte Técnico: mantenimiento en oficinas registrales.</span></div></li><li><i style="background:#9fd4ff"></i><div><b>Lupa</b><br><span>Simboliza la transparencia.</span></div></li><li><i style="background:#2a7fff"></i><div><b>Collar de cables con conectores RJ45</b><br><span>La red que conecta a todo el Instituto.</span></div></li><li><i style="background:#ff8a00"></i><div><b>Listón IFREM</b><br><span>En la cintura del vestido.</span></div></li><li><i style="background:#7cff4f"></i><div><b>Laptop embrujada</b><br><span>Terminal con el mensaje: Transparencia = Integridad.</span></div></li><li><i style="background:#8d84a8"></i><div><b>Tumbas del cementerio digital</b><br><span>Windows XP, Internet Explorer, contraseñas 123456…</span></div></li></ul>
+    <button id="vsb" type="button" aria-expanded="false" aria-controls="vsl">Leer la calaverita</button>
+    <div class="verse" id="vsl" hidden>
+      <p>Cuando el reloj marca la medianoche<br>y los servidores empiezan a gemir,<br>una sombra con diadema y cables<br>se asoma en la red... ¡no hay a dónde huir!</p>
+      <p>Sus ojos verdes velan en la sombra,<br>su lupa halla el bug que se escondió;<br>ningún virus, ningún fantasma,<br>en su red de cables sobrevivió.</p>
+      <p>Y si crees que puedes engañarla,<br>ocultar un dato o fingir,<br>recuerda su conjuro eterno:<br>¡Transparencia = Integridad hasta morir!</p>
+      <p class="sig">La Hechicera · Unidad de Informática · IFREM</p>
+    </div>
 </aside>
 
 <p class="hint">Arrastra para girarla · rueda o pellizco para acercar</p>
@@ -96,11 +86,11 @@ body{
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   stage.appendChild(renderer.domElement);
   renderer.domElement.tabIndex = 0;
-  renderer.domElement.setAttribute('aria-label','Modelo 3D de la Catrina de Informática. Usa las flechas para girar.');
+  renderer.domElement.setAttribute('aria-label','Modelo 3D de la Hechicera de Informática. Usa las flechas para girar.');
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var scene = new THREE.Scene();
+  var scene = new THREE.Scene(); scene.fog = new THREE.FogExp2(0x0a0412, 0.028);
   var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   var root = new THREE.Group(); scene.add(root);
   var fig = new THREE.Group(); root.add(fig);
@@ -121,16 +111,15 @@ body{
     c.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), B.clone().sub(A).normalize());
     return c;
   }
-  function marigold(s){
-    var g = new THREE.Group();
-    var cols = [0xff8a00, 0xffa319, 0xffc13b];
-    for (var i=0;i<3;i++){
-      var m = new THREE.Mesh(new THREE.IcosahedronGeometry(s*(1-i*0.22), 1),
-        new THREE.MeshStandardMaterial({color:cols[i], roughness:0.7, flatShading:true}));
-      m.scale.set(1, 0.55, 1); m.position.y = i*s*0.13; m.rotation.y = i*0.6; g.add(m);
-    }
+  function pumpkin(s,smooth){
+    var g = new THREE.Group(), geo = new THREE.SphereGeometry(s,32,20), p = geo.attributes.position;
+    if (!smooth){ for (var i=0;i<p.count;i++){ var X=p.getX(i), Z=p.getZ(i), k=1+0.07*Math.cos(Math.atan2(Z,X)*8); p.setX(i,X*k); p.setZ(i,Z*k); } geo.computeVertexNormals(); }
+    var b = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({color:0xff7a00,roughness:0.6,emissive:0x5a1c00,emissiveIntensity:0.8}));
+    b.scale.set(1,0.8,1); g.add(b);
+    var st = new THREE.Mesh(new THREE.CylinderGeometry(s*0.1,s*0.16,s*0.3,8), M(0x3b5d1a,0.8)); st.position.y = s*0.78; g.add(st);
     return g;
   }
+  function marigold(s){ return pumpkin(s); }
   function leaf(x,y,z,ry){
     var l = new THREE.Mesh(new THREE.ConeGeometry(0.07,0.32,6), M(0x2f9e44,0.8));
     l.position.set(x,y,z); l.rotation.set(Math.PI/2,0,0); l.rotation.z = ry; return l;
@@ -151,17 +140,14 @@ body{
   function fit(x,txt,maxW,size){ x.font = fnt(size); while(x.measureText(txt).width>maxW && size>12){ size-=4; x.font=fnt(size);} return size; }
 
   var screenTex = tex(1024,640,function(x,w,h){
-    var g = x.createLinearGradient(0,0,0,h); g.addColorStop(0,'#3b1260'); g.addColorStop(1,'#1a0a2c');
-    x.fillStyle=g; x.fillRect(0,0,w,h);
-    x.fillStyle='#120620'; x.fillRect(0,0,w,64);
+    x.fillStyle='#04120a'; x.fillRect(0,0,w,h);
+    x.fillStyle='#0b2416'; x.fillRect(0,0,w,64);
     ['#ff5f57','#ffbd2e','#28c840'].forEach(function(c,i){ x.fillStyle=c; x.beginPath(); x.arc(40+i*38,32,12,0,7); x.fill(); });
-    var cols=['#ff8a00','#d6336c','#2ec4b6','#ffb62e'];
-    for(var i=0;i<16;i++){ x.fillStyle=cols[i%4]; x.beginPath(); x.moveTo(i*64,64); x.lineTo(i*64+64,64); x.lineTo(i*64+32,112); x.closePath(); x.fill(); }
-    x.textAlign='center'; x.textBaseline='middle';
-    var s = fit(x,'Transparencia',900,124); x.fillStyle='#ffb62e'; x.fillText('Transparencia',w/2,250);
-    x.fillStyle='#fff3dc'; x.font="bold 96px 'Figtree', system-ui, sans-serif"; x.fillText('=',w/2,365);
-    s = fit(x,'Integridad',900,124); x.fillStyle='#ff7ab0'; x.fillText('Integridad',w/2,480);
-    x.fillStyle='rgba(255,243,220,.85)'; x.font="600 34px 'Figtree', system-ui, sans-serif"; x.fillText('Unidad de Informática · IFREM',w/2,596);
+    x.textAlign='left'; x.textBaseline='middle'; x.font="600 30px 'Courier New', monospace";
+    [['$ sudo exorcizar --bugs','#7cff4f'],['> escaneando sistemas...','#9fe9b0'],['> 666 amenazas eliminadas','#9fe9b0'],['> acceso concedido','#ffb62e']].forEach(function(l,i){ x.fillStyle=l[1]; x.fillText(l[0],44,112+i*46); });
+    x.textAlign='center'; fit(x,'Transparencia = Integridad',920,76);
+    x.fillStyle='#ff9f1c'; x.shadowColor='#ff7a00'; x.shadowBlur=26; x.fillText('Transparencia = Integridad',w/2,430); x.shadowBlur=0;
+    x.fillStyle='rgba(124,255,79,.9)'; x.font="600 30px 'Figtree', system-ui, sans-serif"; x.fillText('Unidad de Informática · IFREM',w/2,570);
   });
 
   var plaqueTex = tex(4096,128,function(x,w,h){
@@ -215,10 +201,10 @@ body{
   });
 
   /* ---------- luces ---------- */
-  scene.add(new THREE.HemisphereLight(0xfff2e0, 0x5a2a6a, 0.95));
-  var key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(4,8,7); scene.add(key);
-  var fill = new THREE.PointLight(0xff5fa2, 0.7, 30); fill.position.set(-7,3,5); scene.add(fill);
-  var rim = new THREE.PointLight(0xffa319, 0.8, 30); rim.position.set(6,4,-6); scene.add(rim);
+  scene.add(new THREE.HemisphereLight(0x9a8cff, 0x2a0f3d, 0.8));
+  var key = new THREE.DirectionalLight(0xbfd0ff, 0.9); key.position.set(4,8,7); scene.add(key);
+  var fill = new THREE.PointLight(0x7cff4f, 0.8, 30); fill.position.set(-7,3,5); scene.add(fill);
+  var rim = new THREE.PointLight(0xff7a00, 1.1, 30); rim.position.set(6,4,-6); scene.add(rim);
 
   /* ---------- base ---------- */
   var baseMats = [
@@ -237,7 +223,7 @@ body{
   var flames = [];
   [-2.0, 2.0].forEach(function(sx){
     add(fig, new THREE.CylinderGeometry(0.13,0.13,0.5,20), M(CREAM,0.8), sx, 0.55, -0.4);
-    var fl = new THREE.Mesh(new THREE.SphereGeometry(0.09,16,12), new THREE.MeshBasicMaterial({color:0xffb62e}));
+    var fl = new THREE.Mesh(new THREE.SphereGeometry(0.09,16,12), new THREE.MeshBasicMaterial({color:0x7cff4f}));
     fl.scale.set(1,1.6,1); fl.position.set(sx, 0.95, -0.4); fig.add(fl); flames.push(fl);
   });
 
@@ -263,12 +249,14 @@ body{
   var jaw = add(head, new THREE.SphereGeometry(0.5,32,24), skullMat, 0,-0.66,0.08); jaw.scale.set(1.05,0.6,0.85);
   function skullZ(x,y){ return 0.7125*Math.sqrt(Math.max(0, 1-(x/0.75)*(x/0.75)-(y/0.7875)*(y/0.7875))); }
 
+  var eyeLights = [];
   // ojos
   [-1,1].forEach(function(sx){
     var ex = sx*0.28, ey = 0.1;
     var sock = add(head, new THREE.SphereGeometry(0.21,28,20), new THREE.MeshStandardMaterial({color:INK,roughness:0.9}), ex, ey, 0.64);
     sock.scale.set(1,1.15,0.3);
-    var glint = add(head, new THREE.SphereGeometry(0.05,12,10), new THREE.MeshBasicMaterial({color:GOLD}), ex+sx*0.01, ey-0.02, 0.69);
+    var glint = add(head, new THREE.SphereGeometry(0.09,12,10), new THREE.MeshBasicMaterial({color:0x7cff4f}), ex+sx*0.01, ey-0.02, 0.69);
+    var el = new THREE.PointLight(0x7cff4f,0.9,3.2); el.position.set(ex,ey,0.85); head.add(el); eyeLights.push(el);
     for (var k=0;k<16;k++){
       var a = k/16*Math.PI*2, rx = ex+Math.cos(a)*0.265, ry = ey+Math.sin(a)*0.285;
       add(head, new THREE.SphereGeometry(0.03,8,8), M(k%2?MAG:ORANGE,0.6), rx, ry, skullZ(rx,ry)+0.005);
@@ -283,8 +271,7 @@ body{
   var nose = add(head, new THREE.SphereGeometry(0.07,16,12), new THREE.MeshStandardMaterial({color:INK,roughness:0.9}), 0,-0.17,0.69);
   nose.scale.set(0.9,1.3,0.4);
   // flor en la frente
-  var ff = marigold(0.1); ff.position.set(0,0.55,0.51); ff.rotation.x = 0.93; head.add(ff);
-  // dientes
+    // dientes
   var toothLine = new THREE.MeshStandardMaterial({color:INK,roughness:0.9});
   var toothMat = M(0xfffdf3,0.5);
   for (var t=-4;t<=4;t++){
@@ -317,9 +304,9 @@ body{
   add(hat, new THREE.CylinderGeometry(1.4,1.4,0.07,64), hatMat);
   var disc = new THREE.Mesh(new THREE.CircleGeometry(1.38,64), new THREE.MeshStandardMaterial({map:circuitTex,roughness:0.5,metalness:0.1}));
   disc.rotation.x = -Math.PI/2; disc.position.y = 0.037; hat.add(disc);
-  add(hat, new THREE.CylinderGeometry(0.5,0.6,0.6,40), hatMat, 0,0.33,0);
+  var cone = add(hat, new THREE.ConeGeometry(0.58,1.7,40), hatMat, 0,0.9,0); cone.rotation.z = 0.12;
   add(hat, new THREE.CylinderGeometry(0.615,0.615,0.14,40), M(MAG,0.5), 0,0.1,0);
-  add(hat, new THREE.CylinderGeometry(0.52,0.52,0.02,40), M(0x4a1a6c,0.6), 0,0.64,0);
+  add(hat, new THREE.BoxGeometry(0.28,0.28,0.04), M(GOLD,0.3,0.7), 0,0.1,0.62);
   var cluster = [[0.72,0.13,0.5,0.3],[0.95,0.11,0.12,0.26],[0.45,0.17,0.78,0.22],[0.8,0.1,0.82,0.2],[1.05,0.09,-0.3,0.18]];
   cluster.forEach(function(c){ var f2 = marigold(c[3]); f2.position.set(c[0],c[1],c[2]); hat.add(f2); });
   var mg = add(hat, new THREE.SphereGeometry(0.11,16,12), M(MAG,0.5), 0.62,0.27,0.3); mg.scale.set(1,0.7,1);
@@ -379,6 +366,78 @@ body{
   var scr = new THREE.Mesh(new THREE.PlaneGeometry(1.56,0.975), new THREE.MeshBasicMaterial({map:screenTex, toneMapped:false}));
   scr.position.set(0,0.53,0.0265); lid.add(scr);
 
+  /* ---------- noche de brujas ---------- */
+  var env = new THREE.Group(); scene.add(env);
+  var ground = new THREE.Mesh(new THREE.CircleGeometry(70,64), new THREE.MeshStandardMaterial({color:0x160a26,roughness:1}));
+  ground.rotation.x = -Math.PI/2; ground.position.y = -0.21; env.add(ground);
+  function glowTex(c1,c2){ var cv=document.createElement('canvas'); cv.width=cv.height=128; var g=cv.getContext('2d'), gr=g.createRadialGradient(64,64,0,64,64,64); gr.addColorStop(0,c1); gr.addColorStop(1,c2); g.fillStyle=gr; g.fillRect(0,0,128,128); return new THREE.CanvasTexture(cv); }
+  var moonTex = tex(512,256,function(x,w,h){ x.fillStyle='#ffa583'; x.fillRect(0,0,w,h); var r=rng(3); for(var k=0;k<30;k++){ x.fillStyle='rgba(110,25,20,.4)'; x.beginPath(); x.arc(r()*w,r()*h,6+r()*24,0,7); x.fill(); } });
+  var moon = new THREE.Mesh(new THREE.SphereGeometry(3.2,40,28), new THREE.MeshBasicMaterial({map:moonTex,fog:false}));
+  moon.position.set(4.5,10.5,-24); env.add(moon);
+  var halo = new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex('rgba(255,60,35,.55)','rgba(255,60,35,0)'),blending:THREE.AdditiveBlending,depthWrite:false,fog:false}));
+  halo.scale.set(20,20,1); halo.position.copy(moon.position); env.add(halo);
+
+  function tomb(x,z,ry,lines){
+    var g = new THREE.Group(), st = M(0x3a3350,0.95);
+    add(g, new THREE.BoxGeometry(1.3,1.5,0.32), st, 0,0.75,0);
+    var tp = add(g, new THREE.CylinderGeometry(0.65,0.65,0.32,24), st, 0,1.5,0); tp.rotation.x = Math.PI/2;
+    var tt = tex(256,384,function(c,w,h){ c.clearRect(0,0,w,h); c.textAlign='center'; c.textBaseline='middle'; c.fillStyle='#b6f0a0';
+      lines.forEach(function(l,i){ var sz=fit(c,l,220,i===0?58:36); c.fillText(l,w/2,86+i*58); }); });
+    var pl = new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.8), new THREE.MeshBasicMaterial({map:tt,transparent:true}));
+    pl.position.set(0,1.0,0.17); g.add(pl);
+    g.position.set(x,-0.21,z); g.rotation.y = ry; env.add(g);
+  }
+  tomb(-2.8,-5,0.2,['R.I.P','Windows XP','1985-2014']);
+  tomb(3,-6.5,-0.25,['R.I.P','Internet','Explorer']);
+  tomb(-6,-4,0.5,['404','Página no','encontrada']);
+  tomb(6.5,-3.5,-0.4,['R.I.P','Contraseña','123456']);
+  tomb(-9,-9,0.3,['R.I.P','El bug','de ayer']);
+  tomb(9.5,-8,-0.3,['R.I.P','Disquete','1.44 MB']);
+  tomb(0.2,-13,0,['R.I.P','Clippy']);
+
+  var jacks = [];
+  var faceTx = tex(256,256,function(c,w,h){ c.clearRect(0,0,w,h); c.fillStyle='#ffd23a';
+    [[60,110,85,50],[196,146,171,50]].forEach(function(e){ c.beginPath(); c.moveTo(e[0],90); c.lineTo(e[1],90); c.lineTo(e[2],e[3]); c.fill(); });
+    c.beginPath(); c.moveTo(118,125); c.lineTo(138,125); c.lineTo(128,102); c.fill();
+    c.beginPath(); [[45,150],[70,185],[95,160],[128,190],[160,160],[186,185],[211,150],[190,215],[128,230],[66,215]].forEach(function(q,i){ i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]); }); c.fill(); });
+  function jack(s,x,z,ry){
+    var g = pumpkin(s,true);
+    var face = new THREE.Mesh(new THREE.SphereGeometry(s*1.01,28,18,Math.PI/2-0.65,1.3,Math.PI/2-0.65,1.3), new THREE.MeshBasicMaterial({map:faceTx,transparent:true,depthWrite:false}));
+    face.scale.y = 0.8; g.add(face);
+    var l = new THREE.PointLight(0xff7a00,1.1,9); l.position.set(0,s*0.2,s*1.4); g.add(l); jacks.push(l);
+    g.position.set(x,-0.21+0.8*s,z); g.rotation.y = ry; env.add(g);
+  }
+  jack(0.9,-4.4,3.0,0.5); jack(0.75,4.6,2.4,-0.5); jack(0.55,-2.9,5.5,0.3); jack(0.5,3.1,5.2,-0.3);
+
+  var bats = [], batMat = new THREE.MeshBasicMaterial({color:0x07030d,side:THREE.DoubleSide});
+  var ws = new THREE.Shape(); ws.moveTo(0,0); ws.lineTo(0.5,0.25); ws.lineTo(0.9,0.05); ws.lineTo(0.75,-0.1); ws.lineTo(0.55,0); ws.lineTo(0.35,-0.15); ws.lineTo(0,-0.12);
+  var wingGeo = new THREE.ShapeGeometry(ws), br = rng(21);
+  for (var bi=0; bi<9; bi++){
+    var b = new THREE.Group(), wl = new THREE.Mesh(wingGeo,batMat), wr = new THREE.Mesh(wingGeo,batMat);
+    wr.scale.x = -1; b.add(wl); b.add(wr); add(b, new THREE.SphereGeometry(0.1,10,8), batMat).scale.set(1,1.3,1);
+    b.userData = {wl:wl,wr:wr,r:3+br()*7,h:4+br()*6,s:0.25+br()*0.35,p:br()*6.28,z:-2-br()*9};
+    b.scale.setScalar(0.7+br()*0.7); bats.push(b); env.add(b);
+  }
+
+  var EN = 260, ep = new Float32Array(EN*3), es = [], er = rng(11);
+  for (var ei=0; ei<EN; ei++){ ep[ei*3]=(er()-0.5)*30; ep[ei*3+1]=er()*12; ep[ei*3+2]=-12+er()*20; es.push(0.25+er()*0.5); }
+  var eg = new THREE.BufferGeometry(); eg.setAttribute('position',new THREE.BufferAttribute(ep,3));
+  var embers = new THREE.Points(eg, new THREE.PointsMaterial({size:0.22,map:glowTex('rgba(255,200,120,1)','rgba(255,120,0,0)'),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+  env.add(embers);
+  var spider = new THREE.Group(), sm = new THREE.MeshStandardMaterial({color:0x0d0814,roughness:0.5});
+  add(spider, new THREE.SphereGeometry(0.16,14,10), sm).scale.set(1,1,1.3);
+  add(spider, new THREE.SphereGeometry(0.09,12,8), sm, 0,0,0.2);
+  for (var sl=0; sl<8; sl++){ var sd2 = sl%2 ? 1 : -1, sk = Math.floor(sl/2)-1.5; spider.add(limb([0,0,0.05*sk],[sd2*0.38,-0.15,0.15*sk],0.012,sm)); spider.add(limb([sd2*0.38,-0.15,0.15*sk],[sd2*0.5,-0.4,0.18*sk],0.01,sm)); }
+  [-1,1].forEach(function(e){ add(spider, new THREE.SphereGeometry(0.025,8,6), new THREE.MeshBasicMaterial({color:0xff2a1a}), e*0.05,0.04,0.28); });
+  spider.add(limb([0,0.1,0],[0,9,0],0.004,new THREE.MeshBasicMaterial({color:0x8a8499})));
+  spider.position.set(1.9,5,1.5); env.add(spider);
+  var bloodL = new THREE.PointLight(0xff2a1a,0.9,16); bloodL.position.set(0,0.6,-3); env.add(bloodL);
+  var bolt = new THREE.DirectionalLight(0xaab8ff,0); bolt.position.set(-3,8,4); scene.add(bolt);
+  var flashEl = document.getElementById('flash');
+  function strike(){ [1,0,0.7,0,1,0].forEach(function(v,i){ setTimeout(function(){ flashEl.style.opacity = v*0.8; bolt.intensity = v*3; }, i*90); }); setTimeout(strike, 5000+Math.random()*9000); }
+  if (!reduced) setTimeout(strike, 3500);
+  var lastT = 0;
+
   /* ---------- fuentes y rediseño ---------- */
   function redrawAll(){ texs.forEach(function(t){ t.redraw(); }); }
   if (document.fonts && document.fonts.load){
@@ -436,13 +495,27 @@ body{
     if (open) list.removeAttribute('hidden'); else list.setAttribute('hidden','');
     lg.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
+  var vsb = document.getElementById('vsb'), vsl = document.getElementById('vsl');
+  vsb.addEventListener('click', function(){ var o = vsl.hasAttribute('hidden'); if (o) vsl.removeAttribute('hidden'); else vsl.setAttribute('hidden',''); vsb.setAttribute('aria-expanded', o ? 'true' : 'false'); });
 
   var t0 = performance.now();
   function frame(now){
     var t = (now - t0)/1000;
     if (auto) yaw = Math.sin(t*0.7)*0.4;
     root.rotation.y = yaw; root.rotation.x = pitch;
-    if (!reduced) flames.forEach(function(f,i){ f.scale.set(1, 1.6+Math.sin(t*9+i*2)*0.15, 1); });
+    var dt = Math.min(0.05, t-lastT); lastT = t;
+    if (!reduced){
+      flames.forEach(function(f,i){ f.scale.set(1, 1.6+Math.sin(t*9+i*2)*0.15, 1); });
+      fig.position.y = Math.sin(t*1.1)*0.06;
+      spider.position.y = 5+Math.sin(t*0.8)*0.7;
+      eyeLights.forEach(function(l,i){ l.intensity = 0.8+Math.sin(t*3+i)*0.3-(Math.random()<0.02?0.6:0); });
+      jacks.forEach(function(l,i){ l.intensity = 1.0+Math.sin(t*7+i)*0.2+Math.sin(t*13+i*3)*0.12; });
+      bats.forEach(function(b){ var d=b.userData, a=t*d.s+d.p;
+        b.position.set(Math.cos(a)*d.r, d.h+Math.sin(a*2)*0.8, d.z+Math.sin(a)*2);
+        var fl = Math.sin(t*14+d.p)*0.7; d.wl.rotation.z = fl; d.wr.rotation.z = -fl; b.rotation.z = Math.cos(a)*0.2; });
+      for (var k=0;k<EN;k++){ ep[k*3+1]+=es[k]*dt; ep[k*3]+=Math.sin(t+k)*0.003; if (ep[k*3+1]>12) ep[k*3+1]=-0.2; }
+      eg.attributes.position.needsUpdate = true;
+    }
     renderer.render(scene, camera);
     requestAnimationFrame(frame);
   }
